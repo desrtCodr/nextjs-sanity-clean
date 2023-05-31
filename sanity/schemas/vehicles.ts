@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  name: 'pet',
+  name: 'vehicles',
   type: 'document',
-  title: 'Pet',
+  title: 'Vehicles',
   fields: [
     {
       name: 'name',
