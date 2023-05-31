@@ -21,7 +21,9 @@ const ptComponents = {
         <Image
           alt={value.alt || ' '}
           loading="lazy"
-          src={urlFor(value).width(320).height(240).fit('max').auto('format')}
+          src={urlFor(value).url()}
+          width={320}
+          height={240}
         />
       )
     },
@@ -37,26 +39,34 @@ const Post = ({ post }) => {
     body = [],
   } = post
   return (
-    <article>
-      <h1>{title}</h1>
-      <span>By {name}</span>
-      {categories && (
-        <ul>
-          Posted in
-          {categories.map((category) => (
-            <li key={category}>{category}</li>
-          ))}
-        </ul>
-      )}
-      {authorImage && (
-        <div>
-          <Image
-            src={urlFor(authorImage).width(50).url()}
-            alt={`${name}'s picture`}
-          />
-        </div>
-      )}
-      <PortableText value={body} components={ptComponents} />
+    <article className="p-3">
+      <header className="flex justify-between">
+        {categories && (
+          <ul>
+            Posted in
+            {categories.map((category) => (
+              <li key={category}>{category}</li>
+            ))}
+          </ul>
+        )}
+        {authorImage && (
+          <div className="flex items-center gap-3 ">
+            <span>By {name} </span>
+            <Image
+              src={urlFor(authorImage).url()}
+              width={50}
+              height={50}
+              alt={`${name}'s picture`}
+              className="rounded-full"
+            />
+          </div>
+        )}
+      </header>
+
+      <h1 className="p-5 text-center text-3xl">{title}</h1>
+      <div className="m-5">
+        <PortableText value={body} components={ptComponents} />
+      </div>
     </article>
   )
 }

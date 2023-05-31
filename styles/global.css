@@ -55,7 +55,6 @@ pre {
 ul {
   padding: 0;
   margin: 0;
-  margin-bottom: 2rem;
 }
 
 li {
@@ -63,7 +62,7 @@ li {
   padding: 1rem;
   background-color: #fff;
   border-radius: 0.25rem;
-  margin-bottom: 1rem;
+
   font-weight: 600;
   border-radius: 0.25rem;
 }
