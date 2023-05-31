@@ -1,4 +1,6 @@
-import pet from './pet'
-import vehicles from './vehicles'
+import author from './author'
+import blockContent from './blockContent'
+import category from './category'
+import post from './post'
 
-export const schemaTypes = [pet, vehicles]
+export const schemaTypes = [post, author, category, blockContent]
