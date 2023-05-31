@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@next/font": "^13.1.1",
+    "@portabletext/react": "^3.0.2",
     "@sanity/demo": "^1.0.1",
     "@sanity/vision": "^3.1.4",
     "@tailwindcss/typography": "^0.5.8",

@@ -1,55 +1,37 @@
-import { createClient } from 'next-sanity'
+import groq from 'groq'
+import Link from 'next/link'
 
-export default function IndexPage({ pets }) {
-  console.log(pets)
+import { client } from '../sanity/client'
+
+const Index = ({ posts }) => {
   return (
-    <>
-      <header className="border">
-        <h1>Sanity + Next.js</h1>
-      </header>
-      <main className="flex flex-col gap-3">
-        <h2>Pets</h2>
-        {pets.length > 0 && (
-          <ul>
-            {pets.map((pet) => (
-              <li key={pet._id} className="border">
-                {pet?.name}
+    <div>
+      <h1>Welcome to a blog!</h1>
+      {posts.length > 0 &&
+        posts.map(
+          ({ _id, title = '', slug = '', publishedAt = '' }) =>
+            slug && (
+              <li key={_id}>
+                <Link href="/post/[slug]" as={`/post/${slug.current}`}>
+                  {title}
+                </Link>{' '}
+                ({new Date(publishedAt).toDateString()})
               </li>
-            ))}
-          </ul>
+            )
         )}
-        {!pets.length && <p>No pets to show</p>}
-        {pets.length > 0 && (
-          <div>
-            <pre>{JSON.stringify(pets, null, 2)}</pre>
-          </div>
-        )}
-        {pets.length > 0 && (
-          <div>
-            <div>¯\_(ツ)_/¯</div>
-            <p>
-              Your data will show up here once you add some pets into Sanity
-            </p>
-          </div>
-        )}
-      </main>
-    </>
+    </div>
   )
 }
 
-const client = createClient({
-  projectId: 'dd3b6dwa',
-  dataset: 'production',
-  apiVersion: '2023-01-01',
-  useCdn: false,
-})
-
 export async function getStaticProps() {
-  const pets = await client.fetch(`*[_type == "pet"]`)
-
+  const posts = await client.fetch(groq`
+      *[_type == "post" && publishedAt < now()] | order(publishedAt desc)
+    `)
   return {
     props: {
-      pets,
+      posts,
     },
   }
 }
+
+export default Index
