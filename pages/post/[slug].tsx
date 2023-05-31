@@ -32,7 +32,7 @@ const ptComponents = {
 
 const Post = ({ post }) => {
   const {
-    // title = 'Missing title',
+    title = 'Missing title',
     name = 'Missing name',
     categories,
     authorImage,
@@ -63,7 +63,7 @@ const Post = ({ post }) => {
         )}
       </header>
 
-      {/* <h1 className="p-5 text-center text-3xl">{title}</h1> */}
+      <h1 className="p-5 text-center text-3xl">{title}</h1>
       <div className="m-5">
         <PortableText value={body} components={ptComponents} />
       </div>
